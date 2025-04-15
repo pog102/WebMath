@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Structured Layout</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.0/anime.min.js">
+    </script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        :focus {
+            background-color: #c0c0c0;
+            /* width: 0px; */
+            outline: none;
+        }
+
+        .level {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 60px;
+            font-weight: bold;
+        }
+
+        .main {
+            display: inline-flex;
+            flex-direction: column;
+            /* border: 2px solid #333; */
+            padding: 10px;
+            font-family: Arial, sans-serif;
+            font-size: 100px;
+        }
+
+        .top {
+            display: flex;
+
+            justify-content: flex-end;
+        }
+
+        .opr {
+
+            display: flex;
+            justify-content: right;
+            align-items: center;
+        }
+
+        .ab {
+            display: inline-flex;
+            border-bottom: 6px solid black;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .a,
+        .b,
+        .c {
+
+            display: flex;
+            justify-content: right;
+            align-items: center;
+        }
+
+        body {
+            background-color: white;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            /* important for absolute children */
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="level">Lygis: <span id="level-number">14</span></div>
+    <div class="main">
+        <div class="top">
+            <div class="opr">+</div>
+            <div class="ab">
+                <div class="a">12</div>
+                <div class="b">5</div>
+            </div>
+        </div>
+        <div class="c">
+            <span tabindex="0"></span>
+            <span tabindex="0"></span>
+            <span tabindex="0"></span>
+            <span tabindex="0"></span>
+        </div>
+    </div>
+    <script src="generator.js"></script>
+    <script>
+        let arr = (shuffleArray(genpairs([20,40], [20,40])));
+        ops = ['-'];
+        init();
+
+    </script>
+    <script src="inputs.js"></script>
+    <script>
+
+    </script>
+</body>
+
+</html>
