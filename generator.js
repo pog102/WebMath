@@ -13,7 +13,7 @@ function genpairs(a,b){
 
     for (let i = a[0]; i <= a[1]; i++) {
         for (let j = b[0]; j <= b[1]; j++) {
-            if (i >= j){
+            if (i >= j && i-j>=0 && i+j <=99){
             pairs.push([i, j]);
         }}
     }
@@ -35,10 +35,12 @@ function operator(){
 function init(){
     document.getElementsByClassName("a")[0].textContent=arr[0][0];
     document.getElementsByClassName("b")[0].textContent=arr[0][1];
+    document.getElementById("ans").textContent='';
     operator()
     const spans = document.querySelectorAll('.c span');
     spans.forEach(span => {
         span.textContent = '\u2002'; // Invisible space but occupies space
+//   span.textContent = '?'; /
     });
     updateAnswer();
     // ans=arr[0][0]+arr[0][1];

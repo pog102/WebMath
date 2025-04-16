@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Animated Topographic Map</title>
+  <style>
+    body {
+      margin: 0;
+      background: black;
+    }
+    svg {
+      width: 100vw;
+      height: 100vh;
+    }
+    path {
+      fill: none;
+      stroke: white;
+      stroke-width: 1.2;
+      stroke-dasharray: 1000;
+      stroke-dashoffset: 1000;
+    }
+  </style>
+</head>
+<body>
+  <svg viewBox="0 0 800 600">
+    <!-- Sample topographic curves (you can generate more with tools or Illustrator + SVG export) -->
+    <path d="M100,300 C200,250 300,350 400,300 C500,250 600,350 700,300" />
+    <path d="M120,320 C220,270 320,370 420,320 C520,270 620,370 720,320" />
+    <path d="M140,340 C240,290 340,390 440,340 C540,290 640,390 740,340" />
+  </svg>
+
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script>
+    anime({
+      targets: 'path',
+      strokeDashoffset: [anime.setDashoffset, 0],
+      easing: 'easeInOutSine',
+      duration: 2000,
+      delay: anime.stagger(300),
+      direction: 'alternate',
+      loop: true
+    });
+  </script>
+</body>
+</html>

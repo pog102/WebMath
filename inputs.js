@@ -7,6 +7,7 @@ let points={
     bad:0,
     good:0,
 }
+const audio1 = new Audio("./sounds/move.mp3");
 
 waitfornextlevel = false;
 // Handle key events
@@ -21,7 +22,7 @@ document.addEventListener('keydown', function (e) {
         currentIndex=lenofspans;
         spans[currentIndex].focus();
         init();
-        changecolor('black')
+        changecolor('white')
         waitfornextlevel = false;
         if (document.getElementById('level-number').textContent-- ==1){
             localStorage.setItem("points", JSON.stringify(points));
@@ -36,18 +37,26 @@ document.addEventListener('keydown', function (e) {
     
     if (e.key === 'ArrowRight') {
         // Move to the next span to the right
+        // document.getElementById('pop').play();
+
+        audio1.play();
+        
+        
         if (currentIndex < spans.length - 1) {
             currentIndex++;
         }
     } else if (e.key === 'ArrowLeft') {
-    
+       // const audio2 = new Audio("./sounds/move.mp3");
+                audio1.play();
+        // audioPlayer.play();
         if (currentIndex > 0 && currentSpan.textContent != '\u2002') {
             currentIndex--;
         }
     } else if (e.key === 'ArrowUp') {
         // Cycle through numbers from 0 to 9
    //     let currentNumber = parseInt(currentSpan.textContent)  //
-
+   const audio4 = new Audio("./sounds/up.mp3");
+   audio4.play();
         if (!isNaN(currentNumber)) {
             // if (e.key === 'ArrowUp') {
                 currentNumber = (currentNumber + 1) % 10;
@@ -62,6 +71,8 @@ document.addEventListener('keydown', function (e) {
         currentSpan.textContent = currentNumber.toString(); // Converts number to string
     }
     else if ( e.key === 'ArrowDown') {
+        const audio = new Audio("./sounds/down.mp3");
+        audio.play();
         // Cycle through numbers from 0 to 9
      //   let currentNumber = parseInt(currentSpan.textContent)  //
 
@@ -116,12 +127,20 @@ function nextLevel(user_ans) {
     if (ans == user_ans) {
         // add +
         changecolor('green')
+        // document.getElementById('./sounds/correct').play();
+        const audio5 = new Audio("./sounds/correct.mp3");
+        audio5.play();
+      
         points.good++
        
     }
     else {
         // add wrongs
         changecolor('red')
+        // document.getElementById('./sounds/huh').play();
+        const audio6 = new Audio("./sounds/huh.mp3");
+        document.getElementById("ans").textContent=ans;
+        audio6.play();
         points.bad++
     }
 }

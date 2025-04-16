@@ -6,14 +6,25 @@
     <title>Structured Layout</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.0/anime.min.js">
     </script>
+  
+    <link rel="stylesheet" href="bg.css">
+    <!-- <script src="bg.js"></script> -->
     <style>
+    @font-face {
+   
+                font-family: "Lilita One";
+    
+    src: url('fonts/LilitaOne-Regular.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
         * {
             box-sizing: border-box;
         }
 
         :focus {
-            background-color: #c0c0c0;
-            /* width: 0px; */
+            background: rgba(0, 0, 0, 0.2);
+            /* color: rgba(0, 0, 0, 0.623); */
             outline: none;
         }
 
@@ -21,7 +32,7 @@
             position: absolute;
             top: 10px;
             left: 10px;
-            font-size: 60px;
+            font-size: 50px;
             font-weight: bold;
         }
 
@@ -30,9 +41,13 @@
             flex-direction: column;
             /* border: 2px solid #333; */
             padding: 10px;
-            font-family: Arial, sans-serif;
-            font-size: 100px;
-        }
+            font-size: 150px;
+           /* position: absolute;*/
+            /* margin-left: auto;
+            margin-right: auto; */
+            /* margin-left: 30px; */
+            margin-right: calc(50% - 100px);       
+         }
 
         .top {
             display: flex;
@@ -49,7 +64,8 @@
 
         .ab {
             display: inline-flex;
-            border-bottom: 6px solid black;
+            border-bottom: 7px solid white;
+
             display: flex;
             flex-direction: column;
         }
@@ -62,49 +78,85 @@
             justify-content: right;
             align-items: center;
         }
+        #ans {
+  position: fixed;
+  bottom: 0;
+ right: calc(50% - 100px);       
+  justify-content: end;
+  font-size: 120px;
+
+  /* width: 300px; */
+  /* border: 3px solid #73AD21; */
+  
+}
 
         body {
-            background-color: white;
+            overflow: hidden;
+            background: #4e54c8;  
+            background: -webkit-linear-gradient(to left, #8f94fb, #4e54c8);  
+   
+            /* background-color: white; */
             margin: 0;
             height: 100vh;
             display: flex;
-            justify-content: center;
+            /* justify-content: center; */
+            justify-content: flex-end;
             align-items: center;
             position: relative;
             /* important for absolute children */
-            font-family: Arial, sans-serif;
+            font-family: "Lilita One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+
+            color: white;
         }
     </style>
 </head>
 
-<body>
-    <div class="level">Lygis: <span id="level-number">14</span></div>
-    <div class="main">
-        <div class="top">
-            <div class="opr">+</div>
-            <div class="ab">
-                <div class="a">12</div>
-                <div class="b">5</div>
+<ul class="circles">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
+        <div class="level">Lygis: <span id="level-number">20</span></div>
+        <div class="main">
+            <div class="top">
+                <div class="opr">+</div>
+                <div class="ab">
+                    <div class="a">12</div>
+                    <div class="b">5</div>
+                </div>
+            </div>
+            <div class="c">
+                <span tabindex="0"></span>
+                <span tabindex="0"></span>
+                <span tabindex="0"></span>
+                <span tabindex="0"></span>
             </div>
         </div>
-        <div class="c">
-            <span tabindex="0"></span>
-            <span tabindex="0"></span>
-            <span tabindex="0"></span>
-            <span tabindex="0"></span>
-        </div>
-    </div>
-    <script src="generator.js"></script>
-    <script>
-        let arr = (shuffleArray(genpairs([20,40], [20,40])));
-        ops = ['-'];
-        init();
+        <span id="ans">00000</spans>
+        <script src="generator.js"></script>
+        <script>
+            let arr = (shuffleArray(genpairs([10, 90], [10, 90])));
+            ops = ['-','+'];
+            init();
 
-    </script>
-    <script src="inputs.js"></script>
-    <script>
+        </script>
+        <script src="inputs.js"></script>
+        <script>
 
-    </script>
+        </script>
+
+
+
+    <!-- </div> -->
 </body>
 
 </html>
