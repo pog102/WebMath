@@ -7,7 +7,11 @@ let points={
     bad:0,
     good:0,
 }
-const audio1 = new Audio("./sounds/move.mp3");
+const move = new Audio("./sounds/move.mp3");
+const up = new Audio("./sounds/up.mp3");
+const down = new Audio("./sounds/down.mp3");
+const correct = new Audio("./sounds/correct.mp3");
+const huh = new Audio("./sounds/huh.mp3");
 
 waitfornextlevel = false;
 // Handle key events
@@ -38,25 +42,28 @@ document.addEventListener('keydown', function (e) {
     if (e.key === 'ArrowRight') {
         // Move to the next span to the right
         // document.getElementById('pop').play();
-
-        audio1.play();
+        // move.load();
+        
         
         
         if (currentIndex < spans.length - 1) {
+         //   move.cloneNode().play();
             currentIndex++;
         }
     } else if (e.key === 'ArrowLeft') {
        // const audio2 = new Audio("./sounds/move.mp3");
-                audio1.play();
+    //    move.load();
+       
         // audioPlayer.play();
         if (currentIndex > 0 && currentSpan.textContent != '\u2002') {
+            // move.cloneNode().play();
             currentIndex--;
         }
     } else if (e.key === 'ArrowUp') {
         // Cycle through numbers from 0 to 9
    //     let currentNumber = parseInt(currentSpan.textContent)  //
-   const audio4 = new Audio("./sounds/up.mp3");
-   audio4.play();
+
+//    up.cloneNode().play();
         if (!isNaN(currentNumber)) {
             // if (e.key === 'ArrowUp') {
                 currentNumber = (currentNumber + 1) % 10;
@@ -71,8 +78,8 @@ document.addEventListener('keydown', function (e) {
         currentSpan.textContent = currentNumber.toString(); // Converts number to string
     }
     else if ( e.key === 'ArrowDown') {
-        const audio = new Audio("./sounds/down.mp3");
-        audio.play();
+        // down.load();
+        // down.cloneNode().play(); //veryy costly
         // Cycle through numbers from 0 to 9
      //   let currentNumber = parseInt(currentSpan.textContent)  //
 
@@ -88,12 +95,7 @@ document.addEventListener('keydown', function (e) {
         }
         // Ensure the content is a valid number
         currentSpan.textContent = currentNumber.toString(); // Converts number to string
-    }
-
-
-
-
-    else if (e.key === 'Enter' && spans[lenofspans].textContent.trim() !== "") {
+    }else if (e.key === 'Enter' && spans[lenofspans].textContent.trim() != "\u2002") {
         const spanss = document.querySelectorAll('.c span');
 
         const number = parseInt(
@@ -103,9 +105,6 @@ document.addEventListener('keydown', function (e) {
                 .join('')
         );
 
-        console.log(number); // e.g. 1234
-        console.log(ans)
-        console.log("-----------")
         nextLevel(number)
     }
 
@@ -128,8 +127,7 @@ function nextLevel(user_ans) {
         // add +
         changecolor('green')
         // document.getElementById('./sounds/correct').play();
-        const audio5 = new Audio("./sounds/correct.mp3");
-        audio5.play();
+        correct.play();
       
         points.good++
        
@@ -138,9 +136,9 @@ function nextLevel(user_ans) {
         // add wrongs
         changecolor('red')
         // document.getElementById('./sounds/huh').play();
-        const audio6 = new Audio("./sounds/huh.mp3");
+     
         document.getElementById("ans").textContent=ans;
-        audio6.play();
+        huh.play();
         points.bad++
     }
 }
