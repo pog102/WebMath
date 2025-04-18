@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "animejs": "^4.0.1",
+    "howler": "^2.2.4"
+  }
+}

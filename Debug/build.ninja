@@ -1,0 +1,39 @@
+ninja_required_version = 1.7.2
+
+rule gn
+  command = ../../../../../../tizen-studio/tools/tizen-core/tgn.exe --root=./.. -q --c gen .
+  description = Regenerating ninja files
+
+rule tz_gn
+  command = c:/tizen-studio/tools/tizen-core/tz.exe gen .
+  description = Regenerating build files
+
+build build.tz: tz_gn
+  generator = 1
+  depfile = build.tz.d
+
+build build.ninja: gn | build.tz
+  generator = 1
+  depfile = build.ninja.d
+
+subninja toolchain.ninja
+
+build build: phony obj/Build/build.stamp
+build pack: phony obj/Build/pack.stamp
+build webmath.build_web: phony obj/webmath/webmath.build_web.stamp
+build Build$:build: phony obj/Build/build.stamp
+build Build$:hash: phony obj/Build/hash.stamp
+build Build$:pack: phony obj/Build/pack.stamp
+build webmath$:all: phony obj/webmath/all.stamp
+build webmath$:hash: phony obj/webmath/hash.stamp
+build webmath$:webmath.build_web: phony obj/webmath/webmath.build_web.stamp
+
+build all: phony $
+    obj/Build/build.stamp $
+    obj/Build/hash.stamp $
+    obj/Build/pack.stamp $
+    obj/webmath/all.stamp $
+    obj/webmath/hash.stamp $
+    obj/webmath/webmath.build_web.stamp
+
+default all
