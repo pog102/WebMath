@@ -7,7 +7,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.0/anime.min.js">
     </script>
     <script src="node_modules\howler\src\howler.core.js"></script>
-    <script src="node_modules\animejs\lib\anime.min.cjs"></script>
+    <script src="node_modules\animejs\lib\anime.cjs"></script>
     <link rel="stylesheet" href="bg.css">
     <!-- <script src="bg.js"></script> -->
     <style>
@@ -70,7 +70,7 @@
         .c {
 
             display: flex;
-            justify-content: right;
+            justify-content: flex-end;
             align-items: center;
         }
 
@@ -118,7 +118,7 @@
             position: absolute;
             top: 10px;
             left: 25px;
-            font-size: 50px;
+            font-size: 85px;
             font-weight: bold;
         }
 
@@ -127,14 +127,19 @@
         }
 
         progress::-webkit-progress-value {
-            background: var(--prog);
+            /* background: var(--prog); */
+            background-color:red; /* Background (track) */
         }
 
-        progress {
+        progress::-webkit-progress-value {
+  background-color: #4caf50; /* Foreground (progress fill) */
+  border-radius: 10px;
+}
+        #prog {
             color: var(--prog);
         }
 
-        progress {
+        #prog {
             transform: skew(-30deg);
             z-index: -1;
             /* background-color: ; */
@@ -146,17 +151,22 @@
             display: flex;
             /* -webkit-appearance: none; */
             /* -moz-appearance: none; */
-            appearance: none;
-
-            top: 40px;
+        
+            top: 73px;
             left: -10px;
             /* left: 11px; */
             position: absolute;
-            width: 300px;
-            height: 30px;
+            width: 400px;
+            height: 35px;
 
         }
-    </style>
+        #prog>div {
+            
+  background-color: var(--prog);
+  width: 0%;
+
+}
+  </style>
 </head>
 
 <ul class="circles">
@@ -175,7 +185,10 @@
 
 <div class="level-box">Lygis: <span id="level-number"></span>
 
-    <progress id="prog" value="0" max="19"></progress>
+    <div id="prog">
+<div></div>
+
+    </div>
 
 
 </div>
@@ -185,7 +198,10 @@
 
     document.getElementById("level-number").textContent = levels;
     document.getElementById("prog").max = levels;
-
+    function setCustomProgress(value) {
+     const fill = document.querySelector('#prog > div');;
+    fill.style.width = value + '%';
+        }
 </script>
 <div class="main">
     <div class="top">
@@ -206,8 +222,11 @@
     <script src="generator.js"></script>
     <script>
         let arr = (shuffleArray(genpairs([20, 99], [20, 99])));
+        // let arr = (shuffleArray(genpairs([20, 22], [20, 22])));
+        // setCustomProgress(12)
         ops = ['-', '+'];
         init();
+        console.log(arr)
 
     </script>
     <script src="inputs.js"></script>

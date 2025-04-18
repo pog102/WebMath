@@ -1,24 +1,25 @@
 // Get all span elements (the number selectors)
 
+
+
+
 function increaseProgress() {
     // if (progress >= 100) return;
     
 
-    const newProgress = levels-document.getElementById('level-number').textContent+1;
-console.log(newProgress)
-    anime({
-      targets: '#prog',
-      value: newProgress,
-      easing: 'easeInOutQuad',
+    const newProgress = document.getElementById('curLevel').textContent;
+    animate('#prog > div',{
+    //   targets: 
+    width: newProgress*100/levels + '%',
+    //   to: newProgress*100/levels,
+      ease: 'linear',
       duration: 500
     });
-    // document.getElementById("prog").value=levels; 
 
-    // progress = newProgress;
   }
 
-
-
+// import { anime } from 'node_modules/animejs/lib/anime.cjs';
+// import { anime } from 'node_modules/animejs/lib/anime.min.cjs';
 
 
 // var animateProgress = anime({
@@ -32,30 +33,57 @@ console.log(newProgress)
 //   };
   
 const xMax = 16;
-const shake = anime({
-  targets: '.c',
-  easing: 'easeInOutSine',
-  duration: 400,
-  translateX: [
-    {
-      value: xMax * -1,
-    },
-    {
-      value: xMax,
-    },
-    {
-      value: xMax/-2,
-    },
-    {
-      value: xMax/2,
-    },
-    {
-      value: 0,
-    }
-  ],
-  autoplay: false,
-});
+
+const shake = animate('.c',{
+    // targets: 
+    // easing: 'easeInOutSine',
+    ease: 'outElastic',
+    duration: 400,
+    translateX: [
+      {
+        to: xMax * -1,
+      },
+      {
+        to: xMax,
+      },
+      {
+        to: xMax/-2,
+      },
+      {
+        to: xMax/2,
+      },
+      {
+        to: 0,
+      }
+    ],
+    // autoplay: false,
+  });
+
+// const shake = animate('.c',{
+
+//   easing: 'easeInOutSine',
+//   duration: 400,
+//   translateX: [
+//     {
+//       value: xMax * -1,
+//     },
+//     {
+//       value: xMax,
+//     },
+//     // {
+//     //   value: xMax/-2,
+//     // },
+//     // {
+//     //   value: xMax/2,
+//     // },
+//     // {
+//     //   value: 0,
+//     // }
+//   ],
+//   autoplay: false,
+// });
 const send = () => {
+    
   shake.restart();
 };
 
@@ -79,12 +107,22 @@ var sfx= {
     main:new Howl({
         src:"./sounds/main_theme.mp3",
         autoplay:true,
-        volume: 0.31,
+        volume: 0.22,
         loop: true,
     }
 )
  }
+//  window.addEventListener('load', () => {
+//     const event = new KeyboardEvent('keydown', {
+//       key: 'Enter',      // or any key you want, like 'ArrowRight'
+//       code: 'Enter',
+//       keyCode: 13,
+//       which: 13,
+//       bubbles: true,
+//     });
 
+//     document.dispatchEvent(event);
+//   });
 const spans = document.querySelectorAll('.c span');
 
 let currentIndex = spans.length - 1; // Start with the last span
@@ -111,13 +149,17 @@ document.addEventListener('keydown', function (e) {
         init();
         changecolor('white')
         waitfornextlevel = false;
-        if (document.getElementById('level-number').textContent-- ==1){
+        if (document.getElementById('curLevel').textContent >= levels){
             localStorage.setItem("points", JSON.stringify(points));
             //            localStorage.setItem("username", "Alice");
             window.location.href = 'result.html';
-            // return
+             return
         };
-        return
+
+        document.getElementById('curLevel').textContent++
+        // document.getElementById('curLevel').textContent++
+        //
+        // return
     }
     const currentSpan = spans[currentIndex];
     let currentNumber = parseInt(currentSpan.textContent)  //
@@ -224,6 +266,7 @@ function nextLevel(user_ans) {
         document.getElementById("ans").textContent=ans;
         send();
         sfx.Bad.play()
+
         points.bad++
     }
 }
