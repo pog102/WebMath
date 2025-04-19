@@ -6,6 +6,8 @@
   <title>Structured Layout</title>
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.0/anime.min.js"> -->
   <!-- </script> -->
+  <script src="node_modules\animejs\lib\anime.cjs"></script>
+
   <script src="node_modules\howler\src\howler.core.js"></script>
   <script src="node_modules\animejs\lib\anime.min.cjs"></script>
   <!-- <link rel="stylesheet" href="bg.css"> -->
@@ -205,13 +207,19 @@
 
 
     let final = Math.round(good * 10 / (bad + good));
-    document.getElementById("ans").textContent = final;
+    // let final = 10
     document.getElementById("bad").textContent = bad;
     document.getElementById("good").textContent = good;
 
 
 
+    // const [ $time ] = utils.$('.time');
 
+createTimer({
+  playbackRate: 0.012,
+  duration: final,
+  onUpdate: self=> document.getElementById("ans").textContent=utils.round(self.currentTime, 0),
+});
 
     document.addEventListener('keydown', function (e) {
 
@@ -219,7 +227,44 @@
 
 
     })
+  
+  
+  
+  
+// const text = document.querySelector('.rotated-text');
+// text.innerHTML = text.textContent.replace(/\S/g,"<span>amp;</span>");
+// var textAnime = Animation('.text span',{
+// // targets: ,
+// // ease: 'easeOutExpo',
+// // loop: true,
+// delay: anime.stagger(100),
+// duration: 1500 , // 1.5 seconds
+// })
+
+
+
+
+// textAnime.add({
+// translateY: [-600,0], //[start value, end Value]
+// scale: [10, 1],
+// opacity: [0, 1]
+// }).add({
+// translateX: [0,-1000], //[start value, end Value]
+// scale: [1, 15],
+// opacity: [1, 0]
+// }).add({
+// translateX: [1000, 0], //[start value, end Value]
+// scale: [15, 1],
+// opacity: [0, 1]
+// }).add({
+// translateX: [0, 0], //[start value, end Value]
+// scale: [1, 50],
+// opacity: [1, 0]
+// })
+  
+  
   </script>
+
 
 
 
