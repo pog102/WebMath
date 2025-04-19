@@ -8,11 +8,13 @@
     // add more songs as needed
   ];
 
-  let queue = [];
-  let currentIndexs = 0;
+  // let queue = [];
+  // let currentSongIndex = 0;
+  let currentSongIndex = 0;
+  let currentSound = null;
+  let isPaused = false;
 
-  function shuffles(array) {
-    // Fisher-Yates shuffle
+  function shuffleSong(array) {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [array[i], array[j]] = [array[j], array[i]];
@@ -20,31 +22,81 @@
     return array;
   }
 
-  function playNext() {
-    if (currentIndexs >= queue.length) {
-      // End of queue, reshuffle and restart
-      queue = shuffles([...songUrls]);
-      currentIndexs = 0;
+  function playSong(index) {
+    if (currentSound) {
+      currentSound.unload(); // clean up previous sound
     }
 
-    const sound = new Howl({
-      src: [queue[currentIndexs]],
-    //   html5: true,
-    //   autoplay:true,
-    
-  volume: 0.7,
-        onend: () => {
-        currentIndexs++;
-        playNext(); // Play the next song
+    currentSongIndex = index;
+
+    currentSound = new Howl({
+      src: [queue[currentSongIndex]],
+      // html5: true,
+      onend: () => {
+        playNext();
       }
     });
 
-    sound.play();
+    currentSound.play();
+    isPaused = false;
+    // updateMediaSession();
   }
 
-  // Initialize the queue and start playing
-  queue = shuffles([...songUrls]);
-  playNext();
+  function playNext() {
+    currentSongIndex++;
+    if (currentSongIndex >= queue.length) {
+      queue = shuffleSong([...songUrls]);
+      currentSongIndex = 0;
+    }
+    playSong(currentSongIndex);
+  }
+
+  function playPrevious() {
+    currentSongIndex--;
+    if (currentSongIndex < 0) {
+      currentSongIndex = queue.length - 1;
+    }
+    playSong(currentSongIndex);
+  }
+
+  function togglePlayPause() {
+    if (!currentSound) return;
+    if (isPaused) {
+      currentSound.play();
+    } else {
+      currentSound.pause();
+    }
+    isPaused = !isPaused;
+  }
+
+  // function updateMediaSession() {
+  //   if ('mediaSession' in navigator) {
+  //     navigator.mediaSession.metadata = new MediaMetadata({
+  //       title: `Track ${currentSongIndex + 1}`,
+  //       artist: 'Unknown Artist',
+  //       album: 'Random Playlist',
+  //       artwork: [
+  //         { src: 'cover.jpg', sizes: '512x512', type: 'image/jpeg' } // Optional
+  //       ]
+  //     });
+
+  //     navigator.mediaSession.setActionHandler('play', togglePlayPause);
+  //     navigator.mediaSession.setActionHandler('pause', togglePlayPause);
+  //     navigator.mediaSession.setActionHandler('previoustrack', playPrevious);
+  //     navigator.mediaSession.setActionHandler('nexttrack', playNext);
+  //   }
+  // }
+
+  // Start the playlist
+  queue = shuffleSong([...songUrls]);
+  playSong(0);
+
+
+
+
+
+
+
 
 
 
@@ -271,7 +323,14 @@ document.addEventListener('keydown', function (e) {
         );
 
         nextLevel(number)
-    }
+    } else if (e.key === 'MediaTrackNext') {
+      playNext()
+    } else if (e.key === 'MediaTrackPrevious') {
+      playPrevious() 
+    } else if (e.key === 'c') {
+      const spanss = document.querySelectorAll('.c span');
+      nextLevel(ans)
+  }
 
     // Focus the current span after moving
     spans[currentIndex].focus();
