@@ -10,7 +10,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Kanit&family=Lilita+One&family=Winky+Rough:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
     <style>
-      
+              @font-face {
+
+font-family: "Lilita One";
+
+src: url('fonts/LilitaOne-Regular.ttf');
+font-weight: normal;
+font-style: normal;
+}
       body {
         font-family: "Lilita One", sans-serif;
           background-color: white;
@@ -39,6 +46,15 @@
     Geri: <span style="color:green">${points.good} </span><br>
       Blogi: <span style="color:red">${points.bad}</span>
     `;
+
+
+
+    document.addEventListener('keydown', function (e) {
+      
+tizen.application.getCurrentApplication().exit();
+
+    
+    })
     </script>
 </body>
 </html>

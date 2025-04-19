@@ -1,4 +1,52 @@
 // Get all span elements (the number selectors)
+ // Array of song URLs
+ const songUrls = [
+    './sounds/main_theme.mp3',
+    './sounds/beach.mp3',
+    './sounds/ffz.mp3',
+    './sounds/kh2.mp3',
+    // add more songs as needed
+  ];
+
+  let queue = [];
+  let currentIndexs = 0;
+
+  function shuffles(array) {
+    // Fisher-Yates shuffle
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+
+  function playNext() {
+    if (currentIndexs >= queue.length) {
+      // End of queue, reshuffle and restart
+      queue = shuffles([...songUrls]);
+      currentIndexs = 0;
+    }
+
+    const sound = new Howl({
+      src: [queue[currentIndexs]],
+    //   html5: true,
+    //   autoplay:true,
+    
+  volume: 0.7,
+        onend: () => {
+        currentIndexs++;
+        playNext(); // Play the next song
+      }
+    });
+
+    sound.play();
+  }
+
+  // Initialize the queue and start playing
+  queue = shuffles([...songUrls]);
+  playNext();
+
+
 
 
 
@@ -7,7 +55,7 @@ function increaseProgress() {
     // if (progress >= 100) return;
     
 
-    const newProgress = levels-document.getElementById('level-number').textContent+1;
+    const newProgress = document.getElementById('curLevel').textContent;
     animate('#prog > div',{
     //   targets: 
     width: newProgress*100/levels + '%',
@@ -103,24 +151,25 @@ var sfx= {
 
     
 }
- var music = {
-    main:new Howl({
-        src:"./sounds/main_theme.mp3",
-        autoplay:true,
-        volume: 0.31,
-        loop: true,
-    }
-)
- }
 
+//  window.addEventListener('load', () => {
+//     const event = new KeyboardEvent('keydown', {
+//       key: 'Enter',      // or any key you want, like 'ArrowRight'
+//       code: 'Enter',
+//       keyCode: 13,
+//       which: 13,
+//       bubbles: true,
+//     });
+
+//     document.dispatchEvent(event);
+//   });
 const spans = document.querySelectorAll('.c span');
 
 let currentIndex = spans.length - 1; // Start with the last span
 let lenofspans= currentIndex 
-let points={
-    bad:0,
-    good:0,
-}
+let bad=0
+let good=0
+
 // const move = new Audio("./sounds/move.mp3");
 
 
@@ -139,13 +188,18 @@ document.addEventListener('keydown', function (e) {
         init();
         changecolor('white')
         waitfornextlevel = false;
-        if (document.getElementById('level-number').textContent-- ==1){
-            localStorage.setItem("points", JSON.stringify(points));
+        if (document.getElementById('curLevel').textContent >= levels){
+            // localStorage.setItem("points", JSON.stringify(points));
             //            localStorage.setItem("username", "Alice");
-            window.location.href = 'result.html';
-            // return
+            // window.location.href = 'result.html';
+            window.location.href = `test.html?bad=${bad}&good=${good}`;
+             return
         };
-        return
+
+        document.getElementById('curLevel').textContent++
+        // document.getElementById('curLevel').textContent++
+        //
+        // return
     }
     const currentSpan = spans[currentIndex];
     let currentNumber = parseInt(currentSpan.textContent)  //
@@ -241,7 +295,7 @@ function nextLevel(user_ans) {
         // document.getElementById('./sounds/correct').play();
         sfx.Correct.play()
       
-        points.good++
+        good++
        
     }
     else {
@@ -253,6 +307,6 @@ function nextLevel(user_ans) {
         send();
         sfx.Bad.play()
 
-        points.bad++
+        bad++
     }
 }

@@ -66,5 +66,5 @@ function updateAnswer() {
             ans = null;
     }
 
-    console.log('Answer:', ans);
+    // console.log('Answer:', ans);
 }

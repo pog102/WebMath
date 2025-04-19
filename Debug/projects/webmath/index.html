@@ -156,7 +156,7 @@
             left: -10px;
             /* left: 11px; */
             position: absolute;
-            width: 400px;
+            width: 440px;
             height: 35px;
 
         }
@@ -165,6 +165,13 @@
   background-color: var(--prog);
   width: 0%;
 
+}
+#curLevel {
+    display: inline-block;
+  text-align: right;
+  /* width: 100px; */
+  /* background: rgb(227, 0, 0); just for debugging */
+  /* min-width: 2ch; adjust this depending on the max number width     */
 }
   </style>
 </head>
@@ -183,7 +190,7 @@
     <li></li>
 </ul>
 
-<div class="level-box">Lygis: <span id="level-number"></span>
+<div class="level-box">Lygis: <span id="curLevel">1</span>/<span id="level-number"></span>
 
     <div id="prog">
 <div></div>
@@ -197,11 +204,17 @@
     levels = 20;
 
     document.getElementById("level-number").textContent = levels;
-    document.getElementById("prog").max = levels;
-    function setCustomProgress(value) {
-     const fill = document.querySelector('#prog > div');;
-    fill.style.width = value + '%';
-        }
+
+    document.getElementById("curLevel").style.minWidth = levels.toString().length*50+"px";
+    // const boxchars=document.querySelector('.level-box').textContent.length
+    document.getElementById("prog").style.width = 310+levels.toString().length * 2*50+"px";
+// console.log("levs"+levels.toString().length)
+    // document.getElementById("prog").style.width = "2000px";
+    // document.getElementById("prog").max = levels;
+    // function setCustomProgress(value) {
+    //  const fill = document.querySelector('#prog > div');;
+    // fill.style.width = value + '%';
+    //     }
 </script>
 <div class="main">
     <div class="top">
@@ -226,7 +239,7 @@
         // setCustomProgress(12)
         ops = ['-', '+'];
         init();
-        console.log(arr)
+        // console.log(arr)
 
     </script>
     <script src="inputs.js"></script>

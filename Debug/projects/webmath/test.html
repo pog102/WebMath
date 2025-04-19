@@ -2,24 +2,23 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Structured Layout</title>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.0/anime.min.js"> -->
-    <!-- </script> -->
-    <script src="node_modules\howler\src\howler.core.js"></script>
-    <script src="node_modules\animejs\lib\anime.min.cjs"></script>
-    <!-- <link rel="stylesheet" href="bg.css"> -->
-    <!-- <script src="bg.js"></script> -->
-    <style>
-/* Cool infinite background scrolling animation.
+  <meta charset="UTF-8">
+  <title>Structured Layout</title>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.0/anime.min.js"> -->
+  <!-- </script> -->
+  <script src="node_modules\howler\src\howler.core.js"></script>
+  <script src="node_modules\animejs\lib\anime.min.cjs"></script>
+  <!-- <link rel="stylesheet" href="bg.css"> -->
+  <!-- <script src="bg.js"></script> -->
+  <style>
+    /* Cool infinite background scrolling animation.
  * Twitter: @kootoopas
  */
 
-/* Exo thin font from Google. */
-@import url('https://fonts.googleapis.com/css?family=Exo:100');
+    /* Exo thin font from Google. */
 
-/* Animations */
-@keyframes bg-scrolling-reverse {
+    /* Animations */
+    /* @keyframes bg-scrolling-reverse {
   0% {
     background-position: 50px 50px;
   }
@@ -29,23 +28,23 @@
   100% {
     background-position: 50px 50px;
   }
-}
+} */
 
-/* Main styles */
-body {
-  margin-top: 13.5rem;
-  color: #7d0909;
-  font: 400 16px/1.5 'Exo', Ubuntu, "Segoe UI", Helvetica, Arial, sans-serif;
-  text-align: center;
+    /* Main styles */
+    body {
+      /* margin-top: 13.5rem; */
+      background: rgb(43, 43, 118);
+      /* font: 400 16px/1.5 'Exo', Ubuntu, "Segoe UI", Helvetica, Arial, sans-serif; */
+      /* text-align: center; */
 
-  background: url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpnghq.com%2Fwp-content%2Fuploads%2Fgolden-lion-png-transparent-images-free-download-png-alpha-channel-768x854.png&f=1&ipt=752f1e034cc68390af4009d72d0eaa4abc28f124c78e0f14d7a9eacb34059478") repeat 0 0;
+      /* background: url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpnghq.com%2Fwp-content%2Fuploads%2Fgolden-lion-png-transparent-images-free-download-png-alpha-channel-768x854.png&f=1&ipt=752f1e034cc68390af4009d72d0eaa4abc28f124c78e0f14d7a9eacb34059478") repeat 0 0; */
 
-  animation: bg-scrolling-reverse 2.1s infinite linear;
-  position: relative;
-}
+      /* animation: bg-scrolling-reverse 2.1s infinite linear; */
+      /* position: relative; */
+    }
 
-/* Display "INFINITY" text */
-body::before {
+    /* Display "INFINITY" text */
+    /* body::before {
   content: "INFINITY";
   font-size: 8rem;
   font-weight: 100;
@@ -54,17 +53,177 @@ body::before {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-}
+} */
 
 
-</style>
+    body {
+      overflow: hidden;
+      font-family: "Lilita One", sans-serif;
+      font-weight: 400;
+      font-style: normal;
+    }
 
-   
+    path {
+      fill: transparent;
+    }
+
+
+
+
+    #cloth {
+      position: fixed;
+
+      /* padding:0; */
+      /* margin:0; */
+      z-index: -1;
+      top: 20%;
+      left: 0;
+
+      width: 100%;
+      height: 100%;
+      background-color: lightblue;
+      /* border: 2px solid blue; */
+      /* padding: 10px; */
+      /* margin: 10px; */
+      border-top-left-radius: 80% 23%;
+      /* border-top: ; */
+      border-bottom: none;
+      border-left: none;
+    }
+
+    @font-face {
+
+      font-family: "Lilita One";
+
+      src: url('fonts/LilitaOne-Regular.ttf');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+
+
+    .container {
+
+      /* color: white; */
+
+
+
+      /* background: ; */
+
+      color: white;
+      display: flex;
+      justify-content: flex-start;
+      /* Moves content to the right */
+      /* align-items: flex-end;   */
+      /* height: 100vh; */
+      padding: 20px;
+      /* Optional: adds spacing from edges */
+      font-size: 229px;
+      margin-top: 74px;
+      /* move down */
+      margin-left: 28px;
+      text-shadow:
+  -2px -2px 0 rgb(43, 43, 118),
+   2px -2px 0 rgb(43, 43, 118),
+  -2px  2px 0 rgb(43, 43, 118),
+   2px  2px 0 rgb(43, 43, 118),
+  -2px  0px 0 rgb(43, 43, 118),
+   2px  0px 0 rgb(43, 43, 118),
+   0px -2px 0 rgb(43, 43, 118),
+   0px  2px 0 rgb(43, 43, 118);
+
+    }
+
+    .rotated-text {
+      transform: rotate(-15deg);
+      display: inline-block;
+    }
+
+    #ans {
+      display: flex;
+      transform: rotate(15deg);
+      margin-top: -292px;
+      justify-content: flex-end;
+      /* Moves content to the right */
+      font-size: 1042px;
+    }
+
+    #Containerbadgood {
+      position: fixed;
+      top: 66%;
+      left: 236px;
+      /* Adjust this for horizontal nudging */
+      transform: translateY(-50%);
+
+      background-color: #5e7f88;
+      color: white;
+      padding: 25px 35px;
+      border-radius: 20px;
+      font-size: 136px;
+      font-family: "Lilita One", sans-serif;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+      line-height: 1.4;
+      text-align: left;
+    }
+
+    #Containerbadgood div {
+      margin-bottom: 10px;
+    }
+
+
+    #bad {
+      color: red;
+    }
+
+    #good {
+      color: greenyellow;
+    }
+  </style>
+
+
 
 </head>
+
 <body>
-    
-<!-- </body> -->
-    </body>
+
+  <div class="container">
+    <div class="rotated-text">Rezultatai</div>
+  </div>
+
+  <div id="ans">10</div>
+
+  <div id="Containerbadgood">
+    Blogi: <sapn id="bad">0</sapn><br>
+    Geri: <sapn id="good">0</span>
+  </div>
+  <div id="cloth"></div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const bad = parseInt(urlParams.get('bad')) || 0;
+    const good = parseInt(urlParams.get('good')) || 0;
+
+
+    let final = Math.round(good * 10 / (bad + good));
+    document.getElementById("ans").textContent = final;
+    document.getElementById("bad").textContent = bad;
+    document.getElementById("good").textContent = good;
+
+
+
+
+
+    document.addEventListener('keydown', function (e) {
+
+      tizen.application.getCurrentApplication().exit();
+
+
+    })
+  </script>
+
+
+
+
+</body>
 
 </html>
